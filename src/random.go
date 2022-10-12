@@ -15,7 +15,7 @@ type Data_Hangman struct {
 
 func (w *Data_Hangman) ChoseWord() {
 	arr, _ := ioutil.ReadFile("word.txt")
-	arrWord := strings.Split(string(arr), string(63))
+	arrWord := strings.Split(string(arr), "\n")
 	w.Word = arrWord[rand.Intn(len(arrWord))]
 }
 
