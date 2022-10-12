@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	
 )
 
 func main() {
@@ -15,14 +14,16 @@ func main() {
 	input := scanner.Text()
 	fmt.Printf("Tu as ecrit : %q", input)
 	for char := 'a'; char <= 'z'; char++ {
-		if "%q" == char && "%q" == lettre {
+		if input == char && input == lettre {
+			for _, elment := range lettre {
+				if lettre == input {
+					lettre = append(lettre, input)
+				}
+			}
 			fmt.Println("Vous avez découvert une lettre :")
-	}else{
-		fmt.Println("Le caractère que vous avez rentre n'est pas valide")
-		break
-	}else if{
-		continue
-	}
+		} else {
+			fmt.Println("Le caractère que vous avez rentre n'est pas valide")
+		}
 
-}
+	}
 }
