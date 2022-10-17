@@ -123,7 +123,6 @@ func (w Data_Hangman) VerifVictory() bool {
 
 func VerifInput(str string) bool {
 	var temp bool
-
 	for _, letter := range str {
 		if letter >= 97 && letter <= 122 {
 			temp = true
