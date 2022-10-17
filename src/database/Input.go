@@ -15,18 +15,19 @@ func (w *Data_Hangman) Input() {
 		input := scanner.Text()
 		if len(input) >= 2 {
 			w.VerifWord(input)
-			fmt.Println("ici")
+			if w.VerifWord(input) {
+				fmt.Println("vous avez gagner !!!")
+				break
+			}
 		} else if len(input) == 1 {
 			w.VerifLetter(input)
+			if !w.VerifVictory() {
+				fmt.Println("vous avez gagner !!!")
+				break
+			}
 		}
 		fmt.Println(w.HangmanPositions[w.Attempts])
-		fmt.Println(w.VerifVictory())
-		if !w.VerifVictory() {
-			fmt.Println("ici2")
-			fmt.Println("vous avez gagner !!!")
-			break
-		}
-		fmt.Print("il vous reste encore ", w.Attempts, " d'essaie")
+		fmt.Print("il vous reste encore ", 10-w.Attempts, " d'essaie")
 	}
 	if w.Attempts == 10 {
 		fmt.Println("vous avez PERDU ")
@@ -63,13 +64,21 @@ func (w *Data_Hangman) VerifLetter(str string) {
 	fmt.Println(w.Word)
 }
 
-func (w *Data_Hangman) VerifWord(str string) {
-	if str == w.ToFind {
+func (w *Data_Hangman) VerifWord(str string) bool {
+	temp := true
+	for i := 0; i < len(w.ToFind)-1; i++ {
+		if str[i] != w.ToFind[i+1] {
+			temp = false
+		}
+	}
+	if temp {
 		fmt.Println("vous avez trouver le mot")
+		return true
 	} else {
 		fmt.Println("vous vous êtes trompé ")
 		w.Attempts += 2
 		fmt.Println(w.Word)
+		return false
 	}
 }
 
