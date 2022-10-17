@@ -9,8 +9,8 @@ import (
 
 type Data_Hangman struct {
 	Word             []string   // Word composed of '_', ex: H_ll_
-	ToFind           string   // Final word chosen by the program at the beginning. It is the word to find
-	Attempts         int      // Number of attempts left
+	ToFind           string     // Final word chosen by the program at the beginning. It is the word to find
+	Attempts         int        // Number of attempts left
 	HangmanPositions [11]string // It can be the array where the positions parsed in "hangman.txt" are stored
 }
 
@@ -29,21 +29,18 @@ func (w *Data_Hangman) DisplayLetters() {
 		nb := rand.Intn(len(w.ToFind))
 		w.Word[nb-1] = string(w.ToFind[nb])
 	}
-	fmt.Print("voici votre mots avec les lettre donner :")
+	fmt.Print("Voici votre mots avec les lettre donner :")
 	DisplayArr(w.Word)
 }
 
-
-func DisplayArr (arr []string) {
+func DisplayArr(arr []string) {
 	for _, str := range arr {
 		fmt.Print(str)
 	}
 	fmt.Print("\n")
 }
 
-
-
-func (w *Data_Hangman) Init(){
+func (w *Data_Hangman) Init() {
 	w.ChoseWord()
 	w.DisplayLetters()
 	w.Position_init()

@@ -10,26 +10,24 @@ import (
 func (w *Data_Hangman) Input() {
 	for w.Attempts < 10 {
 		scanner := bufio.NewScanner(os.Stdin)
-		fmt.Printf("Ecrit la lettre de ton choix : ")
+		fmt.Printf("Ecrit la lettre ou le mots de ton choix : ")
 		scanner.Scan()
 		input := scanner.Text()
 		if len(input) >= 2 {
 			w.VerifWord(input)
-			fmt.Println("ici")
 		} else if len(input) == 1 {
 			w.VerifLetter(input)
 		}
 		fmt.Println(w.HangmanPositions[w.Attempts])
 		fmt.Println(w.VerifVictory())
 		if !w.VerifVictory() {
-			fmt.Println("ici2")
-			fmt.Println("vous avez gagner !!!")
+			fmt.Println("Bravo vous avez gagner !!!")
 			break
 		}
-		fmt.Print("il vous reste encore ", w.Attempts, " d'essaie")
+		fmt.Print("Il vous reste encore ", w.Attempts, " tentative")
 	}
 	if w.Attempts == 10 {
-		fmt.Println("vous avez PERDU ")
+		fmt.Println("Vous avez PERDU !!!")
 	}
 }
 
@@ -44,7 +42,7 @@ func (w *Data_Hangman) VerifLetter(str string) {
 					temp = true
 				}
 				if temp && compt <= w.VerifNbLetter(str) {
-					fmt.Print("la lettre est déja présente")
+					fmt.Print("La lettre est déja présente")
 					break
 				} else {
 					w.Word[index-1] = string(letter)
@@ -55,9 +53,9 @@ func (w *Data_Hangman) VerifLetter(str string) {
 		}
 	}
 	if verify && !temp {
-		fmt.Println("vous avez ajouter une lettre")
+		fmt.Println("Vous avez ajouter une lettre")
 	} else if !verify && !temp {
-		fmt.Println("la lettre rentrée n'est pas dans le mots ")
+		fmt.Println("La lettre rentrée n'est pas dans le mots ")
 		w.Attempts++
 	}
 	fmt.Println(w.Word)
@@ -65,9 +63,9 @@ func (w *Data_Hangman) VerifLetter(str string) {
 
 func (w *Data_Hangman) VerifWord(str string) {
 	if str == w.ToFind {
-		fmt.Println("vous avez trouver le mot")
+		fmt.Println("Vous avez trouver le mot")
 	} else {
-		fmt.Println("vous vous êtes trompé ")
+		fmt.Println("Vous vous êtes trompé ")
 		w.Attempts += 2
 		fmt.Println(w.Word)
 	}
