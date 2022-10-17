@@ -13,22 +13,27 @@ func (w *Data_Hangman) Input() {
 		fmt.Printf("Ecrit la lettre ou le mots de ton choix : ")
 		scanner.Scan()
 		input := scanner.Text()
-		if len(input) >= 2 {
-			w.VerifWord(input)
-			if w.VerifWord(input) {
-				fmt.Println("vous avez gagner !!!")
-				break
+		if VerifInput(input) {
+			if len(input) >= 2 {
+				w.VerifWord(input)
+				if w.VerifWord(input) {
+					fmt.Println("vous avez gagner !!!")
+					break
+				}
+			} else if len(input) == 1 {
+				w.VerifLetter(input)
+				if !w.VerifVictory() {
+					fmt.Println("vous avez gagner !!!")
+					break
+				}
 			}
-		} else if len(input) == 1 {
-			w.VerifLetter(input)
-			if !w.VerifVictory() {
-				fmt.Println("vous avez gagner !!!")
-				break
-			}
-		}
-		fmt.Println(w.HangmanPositions[w.Attempts])
+			fmt.Println(w.HangmanPositions[w.Attempts])
 
-		fmt.Print("il vous reste encore ", 10-w.Attempts, " d'essaie")
+			fmt.Print("il vous reste encore ", 10-w.Attempts, " d'essaie")
+
+		} else {
+			fmt.Println("vous n'avez pas rentrée un chractère acceptable ")
+		}
 
 	}
 	if w.Attempts == 10 {
@@ -111,6 +116,19 @@ func (w Data_Hangman) VerifVictory() bool {
 	for i := 0; i < len(w.Word); i++ {
 		if w.Word[i] == "_" {
 			temp = true
+		}
+	}
+	return temp
+}
+
+func VerifInput(str string) bool {
+	var temp bool
+
+	for _, letter := range str {
+		if letter >= 97 && letter <= 122 {
+			temp = true
+		} else {
+			temp = false
 		}
 	}
 	return temp
