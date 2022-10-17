@@ -29,7 +29,7 @@ func (w *Data_Hangman) DisplayLetters() {
 		nb := rand.Intn(len(w.ToFind))
 		w.Word[nb-1] = string(w.ToFind[nb])
 	}
-	fmt.Print("voici votre mots avec les lettre donner :")
+	fmt.Print("Voici votre mots avec les lettre donner :")
 	DisplayArr(w.Word)
 }
 
