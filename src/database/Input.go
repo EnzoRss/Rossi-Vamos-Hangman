@@ -29,8 +29,11 @@ func (w *Data_Hangman) Input() {
 			}
 			fmt.Println(w.HangmanPositions[w.Attempts])
 
-			fmt.Print("il vous reste encore ", 10-w.Attempts, " d'essaie")
+			fmt.Println("il vous reste encore ", 10-w.Attempts, " d'essaie")
 
+		} else if input == "STOP" {
+			w.saveData()
+			break
 		} else {
 			fmt.Println("vous n'avez pas rentrée un chractère acceptable ")
 		}
@@ -52,7 +55,7 @@ func (w *Data_Hangman) VerifLetter(str string) {
 					temp = true
 				}
 				if temp && compt <= w.VerifNbLetter(str) {
-					fmt.Print("La lettre est déja présente")
+					fmt.Println("La lettre est déja présente")
 					break
 				} else {
 					w.Word[index-1] = string(letter)
