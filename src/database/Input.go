@@ -15,7 +15,6 @@ func (w *Data_Hangman) Input() {
 		input := scanner.Text()
 		if VerifInput(input) {
 			if len(input) >= 2 {
-				w.VerifWord(input)
 				if w.VerifWord(input) {
 					fmt.Println("vous avez gagner !!!")
 					break
@@ -35,7 +34,7 @@ func (w *Data_Hangman) Input() {
 			w.saveData()
 			break
 		} else {
-			fmt.Println("vous n'avez pas rentrée un chractère acceptable ")
+			fmt.Println("vous n'avez pas rentrée un charactère acceptable ")
 		}
 
 	}
@@ -76,7 +75,7 @@ func (w *Data_Hangman) VerifLetter(str string) {
 
 func (w *Data_Hangman) VerifWord(str string) bool {
 	temp := true
-	for i := 0; i < len(w.ToFind)-1; i++ {
+	for i := range str {
 		if str[i] != w.ToFind[i+1] {
 			temp = false
 		}
@@ -86,7 +85,8 @@ func (w *Data_Hangman) VerifWord(str string) bool {
 		return true
 	} else {
 		fmt.Println("Vous vous êtes trompé ")
-		w.Attempts += 2
+		w.Attempts = w.Attempts + 2
+		fmt.Println(w.Attempts)
 		fmt.Println(w.Word)
 		return false
 	}
@@ -94,7 +94,7 @@ func (w *Data_Hangman) VerifWord(str string) bool {
 
 func (w Data_Hangman) VerifNbLetter(str string) int {
 	var compt int
-	for _, letter := range w.ToFind {
+	for _, letter := range str {
 		if string(letter) == w.ToFind {
 			compt++
 		}
@@ -121,16 +121,19 @@ func (w Data_Hangman) VerifVictory() bool {
 			temp = true
 		}
 	}
+
 	return temp
 }
 
 func VerifInput(str string) bool {
 	var temp bool
 	for _, letter := range str {
-		if letter >= 97 && letter <= 122 {
+		if letter >= 7 && letter <= 122 {
 			temp = true
+
 		} else {
 			temp = false
+
 		}
 	}
 	return temp
